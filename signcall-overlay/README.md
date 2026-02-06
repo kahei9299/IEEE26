@@ -5,11 +5,15 @@ npm install
 npm run dev
 
 ## Backend
+**Requires Python 3.10 or 3.11** (mediapipe does not support 3.12+)
+
+```bash
 cd backend
-python -m venv .venv
-source .venv/bin/activate
+python3.11 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8000 --log-level debug
+```
 
 Open frontend and it will connect to ws://localhost:8000/ws
 
