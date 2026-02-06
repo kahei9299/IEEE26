@@ -23,7 +23,9 @@ async def process_frame(session: str, user: str, frame_bgr, ts: int):
     frames = buf[-10:]
     window = LandmarkWindow(frames=frames, ts_start=frames[0].ts, ts_end=frames[-1].ts)
 
-    pred = smooth(predict(window))
+    pred = predict(window)
+    # Pass session:user as session_id for per-session smoothing history
+    pred = smooth(pred, session_id=f"{session}:{user}")
     profile = get_profile(session, user)
     out = translate(pred, profile)
 
